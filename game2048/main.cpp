@@ -6,7 +6,7 @@ int main()
 {
 	int size = 5;
 	int board[5][5] = {
-		{4, 4, 8, 8, 0},
+		{0, 2, 0, 4, 0},
 		{0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0},
@@ -20,6 +20,7 @@ int main()
 	char choice = 'u';	//initialized
 
 	int score = 0; //Starts the score at zero.
+	int moves = 0; //Counts successful moves.
 	while (choice != 'e')
 	{
 
@@ -32,14 +33,21 @@ int main()
 		else if (choice == 'd')
 			move_down(board, size);
 		else if (choice == 'l')
-			move_left(board, score, size);
+			{
+				bool changed = move_left(board, score, size); //Checks whether the tiles have changed.
+				if(changed)
+				{
+					moves++; //Counts this successful move.
+					insert_random(board, size); //Adds one tile after a successful move.
+				}
+			}
 		else if (choice == 'r')
 			move_right(board, size);
 
-		//insert_random(board, size);
 		print_board(board);
 
 		cout<<"Score: "<<score<<endl; //Prints the total score.
+		cout<<"Moves: "<<moves<<endl; //Prints out the number of successful moves.
 
 	}
 

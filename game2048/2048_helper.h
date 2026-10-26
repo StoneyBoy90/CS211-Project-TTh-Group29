@@ -3,8 +3,17 @@
 #include <iomanip>
 using namespace std;
 
-void move_left(int board[][5], int &score, int numrows = 5)
+bool move_left(int board[][5], int &score, int numrows = 5)
 {
+int starting[5][5]; //Saves the starting board.
+for(int r = 0; r < numrows; r++) //cycles through each row.
+{
+	for(int c = 0; c < 5; c++) //Checks each column left to right.
+	{
+		starting[r][c] = board[r][c]; //Copies each starting tile.
+	}
+}
+
 	for(int r = 0; r < numrows; r++) //Cycles through each row.
 	{
 		int nextCol = 0; //Starts placing tiles in column 0.
@@ -46,6 +55,18 @@ void move_left(int board[][5], int &score, int numrows = 5)
 			}
 		}
 	}
+	for(int r= 0; r < numrows; r++) //Cycles through each row.
+	{
+		for(int c = 0; c < 5; c++) //Cycles through the columns left to right.
+		{
+			if(board[r][c] != starting[r][c]) //Checks for a changed cell.
+			{
+				return true; //At least one tile changed.
+			}
+		}
+	}
+
+	return false; //No cells Changed.
 }
 
 void move_right(int board[][5], int numrows = 5)
@@ -112,7 +133,7 @@ void insert_random(int board[][5], int numrows = 5)
 			if (board[r][c] == 0)
 			{
 				//add number randomly {2,4}
-				board[r][c] = 2 * (1 + (rand() % 2));
+				board[r][c] = 2; //New tiles will have a value of 2.
 				break;
 			}
 		}
