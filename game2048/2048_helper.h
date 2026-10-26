@@ -3,9 +3,49 @@
 #include <iomanip>
 using namespace std;
 
-void move_left(int board[][5], int numrows = 5)
+void move_left(int board[][5], int &score, int numrows = 5)
 {
-	//CODE HERE
+	for(int r = 0; r < numrows; r++) //Cycles through each row.
+	{
+		int nextCol = 0; //Starts placing tiles in column 0.
+		for( int c = 0; c < 5; c++) //Checks each column left to right.
+		{
+			if (board[r][c] != 0) //Skips empty spaces
+			{
+				board[r][nextCol] = board[r][c]; //Places the tile in the next spot.
+				if(nextCol != c) //Checks whether the tile moved.
+				{
+				board[r][c] = 0; //Clears the old spot if the tile moved.
+				}
+				nextCol++; //Advances to the next spot.
+			}
+		}
+
+		for(int c = 0; c < 4; c++) //Compare tiles beside it
+		{
+			if(board[r][c] != 0 && board[r][c] == board[r][c+1]) //Merges matching tiles that are not zero.
+			{
+				board[r][c] *= 2; //Doubles the left tile.
+				score += board[r][c];
+				board[r][c+1] = 0; //Clears the right tile
+				c++; //Skips the pair so it doesnt merge again.
+			}
+		}
+
+		nextCol = 0; //Resets to column 0.
+		for(int c = 0; c < 5; c++) //Checks each column left to right.
+		{
+			if(board[r][c] != 0) //Skips empty spaces.
+			{
+				board[r][nextCol] = board[r][c]; //Places the tile in the next spot.
+				if(nextCol != c) //Checks whether the tile moved.
+				{
+					board[r][c] = 0; //Clears the old spot if the tile moved.
+				}
+				nextCol++; //Advances to the next spot.
+			}
+		}
+	}
 }
 
 void move_right(int board[][5], int numrows = 5)
