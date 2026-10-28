@@ -32,3 +32,8 @@
 *.app
 
 .vscode/
+.DS_Store
+*.dSYM/
+game2048/main
+game2048_ap
+game2048_app
