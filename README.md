@@ -1,5 +1,5 @@
 # CS211-Project-TTh-Group29
-CS211 group project: 2048 and Luhn checksum checker, written in C++.
+- CS211 group project: 2048 and Luhn checksum checker, written in C++.
 
 # Group 29
 - Jacob Stoner: StoneyBoy90.
